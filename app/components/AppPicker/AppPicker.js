@@ -37,6 +37,7 @@ const AppPicker = ({ title, value, values = [], onAssign }) => {
         <AntDesign name="caretdown" size={26} color={colors.secondary} />
       </TouchableOpacity>
       <Modal visible={modalVisibilty} animationType="slide">
+        <AppPickerValueClose onPress={hideValues} />
         <FlatList
           data={values}
           keyExtractor={(item, index) => `${item}-${index}`}
@@ -62,6 +63,14 @@ const AppPickerValue = ({ content, onPress }) => {
       </TouchableOpacity>
       <AppSeparator />
     </>
+  );
+};
+
+const AppPickerValueClose = ({ onPress }) => {
+  return (
+    <TouchableOpacity style={styles.pickerValue} onPress={onPress}>
+      <AntDesign name="closecircleo" size={45} color={colors.danger} />
+    </TouchableOpacity>
   );
 };
 
