@@ -12,7 +12,6 @@ const AppTextInput = ({ title = "", minLength, ...otherProps }) => {
     ? `Minimałna długość to ${minLength} znaków`
     : "";
 
-
   const minValidatorVisibility =
     minLength && alreadyTouched && otherProps.value.length < minLength;
 
@@ -35,6 +34,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     width: "100%",
+    marginBottom: 40
   },
   textInput: {
     ...fontStyles,
