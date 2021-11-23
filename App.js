@@ -13,10 +13,9 @@ export default function App() {
   const [text, setText] = useState("Init value");
   
   return (
-
-    <AppScreen title="Test screen">
-      <AppPicker title="Select value" value={text} values={["First", "Second", "Third", "Fourth"]} onAssign={setText} />
-    </AppScreen>
+      <View>
+        
+      </View>
   );
 }
 
