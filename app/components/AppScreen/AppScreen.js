@@ -16,7 +16,7 @@ const AppScreen = ({ title, children, style = [] }) => {
 
 const AppTitle = ({ title }) => {
   //TODO: read line name
-  const lineName = "Bispol MES L-00";
+  const lineName = "L-00";
 
   return (
     <View style={styles.title}>
