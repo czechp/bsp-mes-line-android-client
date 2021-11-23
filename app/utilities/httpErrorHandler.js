@@ -1,14 +1,17 @@
 import showToast from "./showToast";
 
 const httpErrorHandler = (error) => {
+  if (error.toString() === "Error: Network Error") {
+    showToast("Brak połączenia z serwerem!");
+    return;
+  }
   switch (error.response.data.status) {
     case 401:
-        showToast("Niepoprawne dane logowania!")
+      showToast("Niepoprawne dane logowania!");
       break;
     default:
-      console.log("Unindetified error");
+      showToast("Unindetified error!");
   }
 };
-
 
 export default httpErrorHandler;

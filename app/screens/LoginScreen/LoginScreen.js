@@ -10,8 +10,9 @@ import httpErrorHandler from "../../utilities/httpErrorHandler";
 import showToast from "../../utilities/showToast";
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  //TODO Remove it after completing settings
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("admin123");
   const minDataLength = 3;
 
   const dataValidated =

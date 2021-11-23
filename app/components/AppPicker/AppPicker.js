@@ -11,7 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import colors from "../../configuration/colors";
 import AppText from "../AppText/AppText";
 import { useState } from "react/cjs/react.development";
-import AppSeparator from "../AppSeparator.js/AppSeparator";
+import AppSeparator from "../AppSeparator/AppSeparator";
 
 const AppPicker = ({ title, value, values = [], onAssign }) => {
   const [modalVisibilty, setModalVisibility] = useState(false);
@@ -33,6 +33,7 @@ const AppPicker = ({ title, value, values = [], onAssign }) => {
     <View style={styles.container}>
       <AppText style={styles.title}>{title}</AppText>
       <TouchableOpacity style={styles.topSection} onPress={showValues}>
+        <AppText />
         <AppText>{value}</AppText>
         <AntDesign name="caretdown" size={26} color={colors.secondary} />
       </TouchableOpacity>

@@ -14,11 +14,11 @@ const MainNavigator = () => {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator
         screenOptions={{
-          headerTitle: "Bispol MES",
+          headerShown: false,        
         }}
       >
-        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>

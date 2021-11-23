@@ -7,6 +7,7 @@ import AppText from "../AppText/AppText";
 const AppButton = ({
   title,
   onPress,
+  style,
   color = "secondary",
   disabled = false,
 }) => {
@@ -19,7 +20,7 @@ const AppButton = ({
 
   return (
     <TouchableOpacity
-      style={{ ...styles.button, borderColor: mainColor }}
+      style={[{ ...styles.button, borderColor: mainColor }, style]}
       onPress={onPressFunction}
     >
       <AppText style={{ color: mainColor }}>{title}</AppText>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 40,
-    width: "100%"
+    width: "100%",
   },
 });
 
