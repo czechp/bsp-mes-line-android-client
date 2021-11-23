@@ -2,27 +2,27 @@ import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 
 import colors from "../../configuration/colors";
-import AppSeparator from "../AppSeparator.js/AppSeparator";
+import AppSeparator from "../AppSeparator/AppSeparator";
 import AppText from "../AppText/AppText";
+import systemConfiguration from "../../configuration/systemConfiguration";
 
 const AppScreen = ({ title, children, style = [] }) => {
   return (
     <View style={styles.container}>
-      <AppTitle title={title} />
+      {title && <AppTitle title={title} />}
       <View style={[styles.contentContainer, style]}>{children}</View>
     </View>
   );
 };
 
 const AppTitle = ({ title }) => {
-  //TODO: read line name
-  const lineName = "L-00";
+  const lineInfo = `${systemConfiguration.lineName.value} - ${systemConfiguration.lineType.value}`;
 
   return (
     <View style={styles.title}>
       <View style={styles.titleSection}>
-        <AppText>{title}</AppText>
-        <AppText>{lineName}</AppText>
+        <AppText style={styles.titleText}>{title}</AppText>
+        <AppText style={styles.titleText}>{lineInfo}</AppText>
       </View>
       <AppSeparator style={styles.separator} />
     </View>
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     width: "100%",
-    marginTop: StatusBar.currentHeight,
     paddingHorizontal: 15,
   },
   title: {
@@ -49,10 +48,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
   },
+  titleText: {
+    fontSize: 30,
+    fontWeight: "bold",
+  },
   contentContainer: {
     width: "100%",
-    flex: 1
-
+    flex: 1,
   },
 });
 

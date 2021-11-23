@@ -7,7 +7,7 @@ import AppText from "../../components/AppText/AppText";
 
 const MenuScreen = ({ navigation }) => {
   return (
-    <AppScreen style={styles.container} title="Menu główne">
+    <AppScreen style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
           style={styles.logoImage}

@@ -5,17 +5,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import MenuScreen from "../screens/MenuScreen/MenusScreen";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
+import SettingsScreen from "../screens/SettingsScreen/SettingsScreen";
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   return (
-    <NavigationContainer
-     style={styles.container}>
+    <NavigationContainer style={styles.container}>
       <Stack.Navigator
-       screenOptions={{
-           headerTitle: "Bispol MES"
-       }}>
+        screenOptions={{
+          headerTitle: "Bispol MES",
+        }}
+      >
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />
       </Stack.Navigator>
