@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, StatusBar, StyleSheet, View } from "react-native";
 
+
 import colors from "../../configuration/colors";
 import AppSeparator from "../AppSeparator/AppSeparator";
 import AppText from "../AppText/AppText";

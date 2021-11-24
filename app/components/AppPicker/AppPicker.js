@@ -78,6 +78,7 @@ const AppPickerValueClose = ({ onPress }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
+    width: "100%"
   },
   topSection: {
     paddingVertical: 10,
