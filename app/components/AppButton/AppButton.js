@@ -8,7 +8,7 @@ const AppButton = ({
   title,
   onPress,
   style,
-  color = "secondary",
+  color = "primary",
   disabled = false,
 }) => {
   const mainColor = disabled ? colors.secondary : colors[color];

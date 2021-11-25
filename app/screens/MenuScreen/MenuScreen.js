@@ -17,7 +17,10 @@ const MenuScreen = ({ navigation }) => {
       </View>
       <AppForm style={styles.buttonContainer}>
         <AppButton title="Linia" />
-        <AppButton title="Produkty" />
+        <AppButton
+          title="Produkty"
+          onPress={() => navigation.navigate("ProductsScreen")}
+        />
         <AppButton title="Raporty" />
         <AppButton title="Kontrola jakości" />
         <AppButton title="Przestoje produkcyjne" />
