@@ -38,7 +38,7 @@ const LineInfoScreen = ({ navigation }) => {
       dataLoaded={dataLoaded}
     >
       <LineInfoCard line={line} />
-      <AppRefreshButton style={{marginTop: 40}} onPress={getLine} />
+      <AppRefreshButton style={{marginTop: 100}} onPress={getLine} />
     </AppScreen>
   );
 };

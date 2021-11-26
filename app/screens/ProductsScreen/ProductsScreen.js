@@ -40,7 +40,7 @@ const ProductsScreen = ({ navigation }) => {
         showToast(
           `Produkt dla linii ${systemConfiguration.lineName.value} zaktualizowany`
         );
-        //TODO: navigate to LineInfoScreen
+        navigation.navigate("LineInfoScreen");
       })
       .catch((error) => httpErrorHandler(error));
   };

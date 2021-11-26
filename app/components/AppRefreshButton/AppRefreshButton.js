@@ -7,7 +7,7 @@ import colors from "../../configuration/colors";
 const AppRefreshButton = ({ style, ...otherProps }) => {
   return (
     <TouchableOpacity style={[styles.container, style]} {...otherProps}>
-      <Feather name="refresh-cw" size={150} color={colors.primary} />
+      <Feather name="refresh-cw" size={100} color={colors.primary} />
     </TouchableOpacity>
   );
 };
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: colors.primary,
     padding: 30,
-    borderRadius:25
+    borderRadius: 25,
   },
 });
 export default AppRefreshButton;
