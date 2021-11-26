@@ -8,6 +8,7 @@ import systemConfiguration from "../../configuration/systemConfiguration";
 import { useNavigation } from "@react-navigation/core";
 import AppButton from "../AppButton/AppButton";
 import AppIndicator from "../AppIndicator/AppIndicator";
+import { fontLargerStyles } from "../../configuration/styles";
 
 const AppScreen = ({ title, children, style = [], dataLoaded = true }) => {
   return (
@@ -65,8 +66,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   titleText: {
-    fontSize: 30,
-    fontWeight: "bold",
+    ... fontLargerStyles,
     textAlign: "center",
   },
   contentContainer: {

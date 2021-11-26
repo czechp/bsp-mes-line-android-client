@@ -7,7 +7,7 @@ import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import systemConfiguration from "../../configuration/systemConfiguration";
 import { FlatList, StyleSheet } from "react-native";
-import AppText from "../../components/AppText/AppText";
+import showToast from "../../utilities/showToast";
 
 const ProductsScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -27,11 +27,30 @@ const ProductsScreen = ({ navigation }) => {
       });
   };
 
+  const selectProductRequest = (productId) => {
+    axiosInstance
+      .patch(
+        `/lines/product/${systemConfiguration.lineId.value}`,
+        {},
+        {
+          params: { productId: productId },
+        }
+      )
+      .then((response) => {
+        showToast(
+          `Produkt dla linii ${systemConfiguration.lineName.value} zaktualizowany`
+        );
+        //TODO: navigate to LineInfoScreen
+      })
+      .catch((error) => httpErrorHandler(error));
+  };
+
   useEffect(() => {
     const navSubscription = navigation.addListener("focus", () => {
+      setDataLoaded(false);
       getProductsRequest();
     });
-    
+
     return navSubscription;
   }, []);
 
@@ -40,7 +59,14 @@ const ProductsScreen = ({ navigation }) => {
       <FlatList
         data={products}
         keyExtractor={(item, index) => `${item.id}-${index}`}
-        renderItem={({ item }) => <ProductCard productInfo={item} />}
+        renderItem={({ item }) => (
+          <ProductCard
+            productInfo={item}
+            selectProductOnPress={() => {
+              selectProductRequest(item.productId);
+            }}
+          />
+        )}
       />
     </AppScreen>
   );

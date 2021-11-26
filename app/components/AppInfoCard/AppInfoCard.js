@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import { fontLargerStyles } from "../../configuration/styles";
 import AppSeparator from "../AppSeparator/AppSeparator";
 import AppText from "../AppText/AppText";
 
@@ -35,9 +36,8 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   title: {
+    ...fontLargerStyles,
     textAlign: "center",
-    fontSize: 30,
-    fontWeight: "bold",
     marginBottom: 40,
   },
 });

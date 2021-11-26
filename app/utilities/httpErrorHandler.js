@@ -5,9 +5,12 @@ const httpErrorHandler = (error) => {
     showToast("Brak połączenia z serwerem!");
     return;
   }
-  switch (error.response.data.status) {
+  switch (error.response.status) {
     case 401:
       showToast("Niepoprawne dane logowania!");
+      break;
+    case 400:
+      showToast(error.response.data.message);
       break;
     default:
       showToast("Unindetified error!");

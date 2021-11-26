@@ -21,9 +21,8 @@ const SettingsScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [lines, setLines] = useState([]);
-  //TODO: remove init value
-  const [newUsername, setNewUsername] = useState("user");
-  const [newPassword, setNewPassword] = useState("user123");
+  const [newUsername, setNewUsername] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const minDataLength = 3;
   const dataValidated =

@@ -7,6 +7,7 @@ import MenuScreen from "../screens/MenuScreen/MenuScreen";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen/SettingsScreen";
 import ProductsScreen from "../screens/ProductsScreen/ProductsScreen";
+import LineInfoScreen from "../screens/LineInfoScreen.js/LineInfoScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +19,9 @@ const MainNavigator = () => {
           headerShown: false,        
         }}
       >
-        <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
+        <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
 
