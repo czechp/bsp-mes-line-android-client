@@ -1,34 +1,59 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ToastAndroid } from "react-native";
 import AppButton from "../../components/AppButton/AppButton";
 
 import AppForm from "../../components/AppForm/AppForm";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import AppTextInput from "../../components/AppTextInput/AppTextInput";
-import colors from "../../configuration/colors";
+import axiosInstance from "../../utilities/axiosInstance";
+import httpErrorHandler from "../../utilities/httpErrorHandler";
+import showToast from "../../utilities/showToast";
 
-const LoginScreen = ({}) => {
-  const [login, setLogin] = useState("");
+const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const minDataLength = 3;
 
-  const dataValidated = login.length >= minDataLength && password.length >= minDataLength;
+  const dataValidated =
+    username.length >= minDataLength && password.length >= minDataLength;
+
+  const checkUserRole = (role) => {
+      if(role === "ADMIN")
+        navigation.navigate("SettingsScreen");
+      else
+        showToast("Masz zbyt niskie uprawnienia do konfiguracji tego urządzenia.");
+
+  };
+
+  const loginRequest = () => {
+    axiosInstance
+      .post("/appusers/login", { username, password })
+      .then((response) => {
+        checkUserRole(response.data.appUserRole);
+      })
+      .catch((error) => {
+        httpErrorHandler(error);
+      });
+  };
+
   const loginOnPress = () => {
-    //TODO implement it
-    console.log(`Logged with data: ${login} ${password}`);
+    if (dataValidated) {
+      loginRequest();
+    } else {
+      ToastAndroid.show("Sprawdź poprawność danych");
+    }
   };
 
   return (
-    <AppScreen title="Ustawienia" style={styles.container}>
+    <AppScreen title="Logowanie" style={styles.container}>
       <AppForm>
         <AppTextInput
           title="Login:"
           placeholder="Wpisz login"
           autocorrect={false}
           autoFocus
-          value={login}
-          onChangeText={(text) => setLogin(text)}
+          value={username}
+          onChangeText={(text) => setUsername(text)}
           autoCapitalize="none"
           minLength={minDataLength}
         />
@@ -41,7 +66,6 @@ const LoginScreen = ({}) => {
           onChangeText={(text) => setPassword(text)}
           autoCapitalize="none"
           minLength={minDataLength}
-
         />
         <AppButton
           disabled={true}

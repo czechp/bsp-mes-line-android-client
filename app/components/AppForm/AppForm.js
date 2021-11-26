@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-const AppForm = ({children}) => {
-    return <View style={styles.container}>
+const AppForm = ({children, style={}}) => {
+    return <View style={[styles.container, style]}>
         {children}
     </View>
 };

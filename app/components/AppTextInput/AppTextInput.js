@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 10,
+    color: colors.secondary
   },
 });
 
