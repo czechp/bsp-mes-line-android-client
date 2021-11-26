@@ -1,7 +1,6 @@
 import showToast from "./showToast";
 
 const httpErrorHandler = (error) => {
-  console.log(error);
   if (error.toString() === "Error: Network Error") {
     showToast("Brak połączenia z serwerem!");
     return;

@@ -13,7 +13,7 @@ import showToast from "../../utilities/showToast";
 import SettingsLoginPwdForm from "./SettingsLoginPwdForm";
 import SettingsSelectForm from "./SettingsSelectForm";
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [lineId, setLineId] = useState(0);
   const [lineName, setLineName] = useState("");
@@ -103,32 +103,37 @@ const SettingsScreen = () => {
   };
 
   useEffect(async () => {
-    readConfigurationData();
-    getLines();
+    const navSubscription = navigation.addListener("focus", () => {
+      readConfigurationData();
+      getLines();
+    });
+
+    return navSubscription;
   }, []);
 
   return (
-      <AppScreen style={styles.container} title="Ustawienia systemu" dataLoaded={dataLoaded}>
-            <AppInfoCard
-              title="Konfiguracja systemu"
-              data={buildDataForFlatList()}
-            />
-            <SettingsSelectForm
-              value={lineName}
-              values={lines.map((line) => line.name)}
-              onAssign={selectLine}
-            />
-            <SettingsLoginPwdForm
-              minDataLength={minDataLength}
-              username={newUsername}
-              setUsername={setNewUsername}
-              password={newPassword}
-              setPassword={setNewPassword}
-              dataValidated={dataValidated}
-              onPress={updateAuthData}
-              dataValidated={dataValidated}
-            />
-      </AppScreen>
+    <AppScreen
+      style={styles.container}
+      title="Ustawienia systemu"
+      dataLoaded={dataLoaded}
+    >
+      <AppInfoCard title="Konfiguracja systemu" data={buildDataForFlatList()} />
+      <SettingsSelectForm
+        value={lineName}
+        values={lines.map((line) => line.name)}
+        onAssign={selectLine}
+      />
+      <SettingsLoginPwdForm
+        minDataLength={minDataLength}
+        username={newUsername}
+        setUsername={setNewUsername}
+        password={newPassword}
+        setPassword={setNewPassword}
+        dataValidated={dataValidated}
+        onPress={updateAuthData}
+        dataValidated={dataValidated}
+      />
+    </AppScreen>
   );
 };
 

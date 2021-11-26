@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 
 import AppScreen from "../../components/AppScreen/AppScreen";
@@ -9,7 +9,7 @@ import systemConfiguration from "../../configuration/systemConfiguration";
 import { FlatList, StyleSheet } from "react-native";
 import AppText from "../../components/AppText/AppText";
 
-const ProductsScreen = ({}) => {
+const ProductsScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [products, setProducts] = useState([]);
 
@@ -17,7 +17,7 @@ const ProductsScreen = ({}) => {
     axiosInstance
       .get(`/product-efficiencies/lines/${systemConfiguration.lineName.value}`)
       .then((response) => {
-          setProducts(response.data);
+        setProducts(response.data);
       })
       .catch((error) => {
         httpErrorHandler(error);
@@ -27,27 +27,25 @@ const ProductsScreen = ({}) => {
       });
   };
 
-  useState(() => {
-    //TODO: remove it after testing
-    setTimeout(() => {
+  useEffect(() => {
+    const navSubscription = navigation.addListener("focus", () => {
       getProductsRequest();
-      console.log("Changed")
-    }, 1000);
+    });
+    
+    return navSubscription;
   }, []);
 
-  
   return (
     <AppScreen title="Produkty" dataLoaded={dataLoaded}>
-        <FlatList
+      <FlatList
         data={products}
-        keyExtractor={(item, index)=>`${item.id}-${index}`}
-        renderItem={({item})=><ProductCard productInfo={item} />}
-         />
+        keyExtractor={(item, index) => `${item.id}-${index}`}
+        renderItem={({ item }) => <ProductCard productInfo={item} />}
+      />
     </AppScreen>
   );
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default ProductsScreen;
