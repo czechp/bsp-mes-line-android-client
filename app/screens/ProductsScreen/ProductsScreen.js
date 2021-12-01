@@ -1,12 +1,12 @@
-import React, { PureComponent, useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import React, { PureComponent, useEffect, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
+
 
 import AppScreen from "../../components/AppScreen/AppScreen";
 import ProductCard from "./ProductCard";
 import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import systemConfiguration from "../../configuration/systemConfiguration";
-import { FlatList, StyleSheet } from "react-native";
 import showToast from "../../utilities/showToast";
 
 const ProductsScreen = ({ navigation }) => {

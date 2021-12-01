@@ -25,6 +25,19 @@ const translator = {
         return "Błąd nie rozpoznano";
     }
   },
+
+  workShift: (workShift) => {
+    switch (workShift) {
+      case "FIRST":
+        return "I";
+      case "SECOND":
+        return "II";
+      case "THIRD":
+        return "III";
+      default:
+        return "Błąd nie rozpoznano";
+    }
+  },
 };
 
 export default translator;

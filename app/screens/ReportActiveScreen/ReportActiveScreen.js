@@ -73,7 +73,7 @@ const ReportActiveScreen = ({ navigation }) => {
     return navSubscription;
   }, []);
   return (
-    <AppScreen title="Raport" dataLoaded={dataLoaded}>
+    <AppScreen title="Aktualny raport" dataLoaded={dataLoaded}>
       {activeReportExists && (
         <ReportActiveExists
           activeReport={activeReport}

@@ -8,7 +8,7 @@ import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen/SettingsScreen";
 import ProductsScreen from "../screens/ProductsScreen/ProductsScreen";
 import LineInfoScreen from "../screens/LineInfoScreen/LineInfoScreen";
-import ReportActiveScreen from "../screens/ReportActiveScreen/ReportActiveScreen";
+import ReportNavigator from "./ReportNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,13 +20,12 @@ const MainNavigator = () => {
           headerShown: false,        
         }}
       >
-        <Stack.Screen name="ReportActiveScreen" component={ReportActiveScreen} />
+        <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
