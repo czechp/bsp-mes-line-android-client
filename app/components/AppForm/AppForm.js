@@ -9,7 +9,7 @@ const AppForm = ({children, style={}}) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: "60%",
+        width: "80%",
     }
 })
 

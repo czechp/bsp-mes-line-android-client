@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     padding: 30,
     borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center"
   },
 });
 export default AppRefreshButton;
