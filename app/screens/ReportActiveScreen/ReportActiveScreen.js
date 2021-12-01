@@ -6,12 +6,27 @@ import systemConfiguration from "../../configuration/systemConfiguration";
 import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import showToast from "../../utilities/showToast";
-import ReportActiveCard from "./ReportActiveCard";
+import ReportActiveExists from "./ReportActiveExists";
+import ReportActiveNotExists from "./ReportActiveNotExists";
 
 const ReportActiveScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [activeReportExists, setActiveReportExsits] = useState(false);
   const [activeReport, setActiveReport] = useState({});
+
+  const createActiveReportRequest = () => {
+    setDataLoaded(false);
+    axiosInstance
+      .post(`reports/${systemConfiguration.lineId.value}`)
+      .then((response) => {
+        showToast("Nowy raport został stworzony.");
+        getActiveReportRequest();
+      })
+      .catch((error) => {
+        httpErrorHandler(error);
+      })
+      .finally(() => setDataLoaded(true));
+  };
 
   const getActiveReportRequest = () => {
     setDataLoaded(false);
@@ -31,7 +46,7 @@ const ReportActiveScreen = ({ navigation }) => {
   const closeReportRequest = (trashAmount) => {
     axiosInstance
       .patch(
-        `/reports/status/close/${systemConfiguration.lineId.value}`,
+        `/reports/status/close/${activeReport.id}`,
         {},
         {
           params: {
@@ -60,10 +75,15 @@ const ReportActiveScreen = ({ navigation }) => {
   return (
     <AppScreen title="Raport" dataLoaded={dataLoaded}>
       {activeReportExists && (
-        <ReportActiveCard
-          report={activeReport}
+        <ReportActiveExists
+          activeReport={activeReport}
           reloadReport={getActiveReportRequest}
-          closeReportOnClick={closeReportRequest}
+          closeReportRequest={closeReportRequest}
+        />
+      )}
+      {!activeReportExists && (
+        <ReportActiveNotExists
+          createReportOnClick={createActiveReportRequest}
         />
       )}
     </AppScreen>

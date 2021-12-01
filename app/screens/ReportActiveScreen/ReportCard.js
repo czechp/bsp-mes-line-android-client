@@ -1,14 +1,12 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
+
+
 import AppText from "../../components/AppText/AppText";
 import dateFormatter from "../../utilities/dateFormatter";
-import AppRefreshButton from "../../components/AppRefreshButton/AppRefreshButton";
-import ReportActiveCloseForm from "./ReportActiveCloseForm";
 
-const ReportActiveCard = ({
+const ReportCard = ({
   report,
-  reloadReport = () => {},
-  closeReportOnClick,
 }) => {
   return (
     <View style={styles.container}>
@@ -31,8 +29,6 @@ const ReportActiveCard = ({
       <ReportActiveInfoRow
         info={{ title: "Akutalna produkcja [szt.]:", value: report.amount }}
       />
-      <ReportActiveCloseForm closeReportOnClick={closeReportOnClick} />
-      <AppRefreshButton style={styles.refreshButton} onPress={reloadReport} />
     </View>
   );
 };
@@ -48,7 +44,6 @@ const ReportActiveInfoRow = ({ info }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: "100%",
     alignItems: "center",
   },
@@ -63,10 +58,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
-  refreshButton: {
-    width: "30%",
-    marginTop: 200,
-  },
+
 });
 
-export default ReportActiveCard;
+export default ReportCard;
