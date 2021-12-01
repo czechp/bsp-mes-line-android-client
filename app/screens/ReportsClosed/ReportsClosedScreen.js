@@ -9,6 +9,7 @@ import AppText from "../../components/AppText/AppText";
 import { fontSmallerStyles } from "../../configuration/styles";
 import dateFormatter from "../../utilities/dateFormatter";
 import AppSeparator from "../../components/AppSeparator/AppSeparator";
+import translator from "../../utilities/translators";
 
 const ReportsClosedScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -44,10 +45,8 @@ const ReportsClosedScreen = ({ navigation }) => {
     <AppScreen title="Zapisane raporty" dataLoaded={dataLoaded}>
       <FlatList
         data={reports}
-        keyExtractor={() => {
-          (item) => item.id.toString();
-        }}
-        renderItem={({item})=><ReportsClosedCard report={item} />}
+        keyExtractor={(item, index) => `${item.id}-${index}`}
+        renderItem={({ item }) => <ReportsClosedCard report={item} />}
       />
     </AppScreen>
   );
@@ -59,6 +58,12 @@ const ReportsClosedCard = ({ report }) => {
       <AppText style={styles.idText}>Id:{report.id}</AppText>
       <ReportClosedRow
         data={{ title: "Produkt:", value: report.productName }}
+      />
+      <ReportClosedRow
+        data={{
+          title: "Zmiana:",
+          value: translator.workShift(report.reportWorkShift),
+        }}
       />
       <ReportClosedRow
         data={{ title: "Utworzony przez:", value: report.createOperator }}
@@ -115,7 +120,7 @@ const ReportClosedRow = ({ data }) => {
 const styles = StyleSheet.create({
   card: {
     width: "100%",
-    marginBottom: 20
+    marginBottom: 20,
   },
   row: {
     flexDirection: "row",
@@ -134,7 +139,6 @@ const styles = StyleSheet.create({
   titleText: {
     ...fontSmallerStyles,
   },
-  
 });
 
 export default ReportsClosedScreen;
