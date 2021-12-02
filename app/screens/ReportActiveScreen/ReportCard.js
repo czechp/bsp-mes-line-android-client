@@ -13,7 +13,10 @@ const ReportCard = ({ report }) => {
         info={{ title: "Produkt:", value: report.productName }}
       />
       <ReportActiveInfoRow
-        info={{ title: "Zmiana:", value: translator.workShift(report.reportWorkShift) }}
+        info={{
+          title: "Zmiana:",
+          value: translator.workShift(report.reportWorkShift),
+        }}
       />
       <ReportActiveInfoRow
         info={{ title: "Wydajność zmianowa:", value: report.targetAmount }}
@@ -28,7 +31,10 @@ const ReportCard = ({ report }) => {
         }}
       />
       <ReportActiveInfoRow
-        info={{ title: "Akutalna produkcja [szt.]:", value: report.amount }}
+        info={{
+          title: "Czas pracy:",
+          value: `${report.statistics.workingTime.hours} h ${report.statistics.workingTime.minutes} min`,
+        }}
       />
     </View>
   );
