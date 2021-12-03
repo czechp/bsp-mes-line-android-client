@@ -10,6 +10,7 @@ import { fontSmallerStyles } from "../../configuration/styles";
 import dateFormatter from "../../utilities/dateFormatter";
 import AppSeparator from "../../components/AppSeparator/AppSeparator";
 import translator from "../../utilities/translators";
+import colors from "../../configuration/colors";
 
 const ReportsClosedScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -84,26 +85,14 @@ const ReportsClosedCard = ({ report }) => {
           value: dateFormatter(report.finishDate),
         }}
       />
-      <ReportClosedRow
-        data={{
-          title: "Oczekiwana wydajność:",
-          value: report.targetAmount,
-        }}
-      />
 
       <ReportClosedRow
         data={{
-          title: "Odpad:",
-          value: report.trashAmount,
+          title: "Czas pracy:",
+          value: `${report.statistics.workingTime.hours} h  ${report.statistics.workingTime.minutes} min`,
         }}
       />
-
-      <ReportClosedRow
-        data={{
-          title: "Rzeczywista wydajność:",
-          value: report.amount,
-        }}
-      />
+      <ProductionSection report={report} />
       <AppSeparator />
     </View>
   );
@@ -117,6 +106,70 @@ const ReportClosedRow = ({ data }) => {
     </View>
   );
 };
+
+const ProductionSection = ({ report }) => {
+  return (
+    <View>
+      <AppText style={styles.productionTitle}>Produkcja:</AppText>
+      <View style={styles.productionTileContainer}>
+        <ProductionTile
+          title="Rzeczywista"
+          value={`${report.amount} szt.`}
+          color={determineProductionColor(report)}
+        />
+        <ProductionTile
+          title="Rzeczywista"
+          value={`${parseFloat(
+            report.statistics.currentProductionPercent
+          ).toFixed(2)} %.`}
+          color={determineProductionColor(report)}
+        />
+        <ProductionTile
+          title="Oczekiwana"
+          value={`${report.statistics.expectedProduction} szt.`}
+        />
+        <ProductionTile
+          title="Oczekiwana"
+          value={`${parseFloat(
+            report.statistics.expectedProductionPercent
+          ).toFixed(2)} %.`}
+        />
+        <ProductionTile
+          title="Zmianowa"
+          value={`${report.targetAmount} szt.`}
+        />
+      </View>
+    </View>
+  );
+};
+
+const ProductionTile = ({ title, value, color = colors.primary }) => {
+  return (
+    <View>
+      <AppText
+        style={{ ...fontSmallerStyles, textAlign: "center", color: color }}
+      >
+        {title}
+      </AppText>
+      <AppText style={{ textAlign: "center", color }}>{value}</AppText>
+    </View>
+  );
+};
+
+const determineProductionColor = (report) => {
+  if (report) {
+    const percentDifference =
+      report.statistics.expectedProductionPercent -
+      report.statistics.currentProductionPercent;
+    if (percentDifference < 5) return colors.success;
+    else if (percentDifference >= 5 && percentDifference < 10)
+      return colors.warning;
+    return colors.danger;
+  }
+
+  return colors.primary;
+};
+
 const styles = StyleSheet.create({
   card: {
     width: "100%",
@@ -138,6 +191,13 @@ const styles = StyleSheet.create({
   },
   titleText: {
     ...fontSmallerStyles,
+  },
+  productionTitle: {
+    textAlign: "center",
+  },
+  productionTileContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

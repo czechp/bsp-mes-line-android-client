@@ -13,17 +13,17 @@ const ReportNavigator = ({ navigation }) => {
     <AppScreen>
       <ReportTabNavigator.Navigator>
         <ReportTabNavigator.Screen
-          name="ReportActiveScreen"
-          component={ReportActiveScreen}
-          options={{
-            title: "Aktualny raport",
-          }}
-        />
-        <ReportTabNavigator.Screen
           name="ReportsClosedScreen"
           component={ReportsClosedScreen}
           options={{
             title: "Zapisane raporty",
+          }}
+        />
+        <ReportTabNavigator.Screen
+          name="ReportActiveScreen"
+          component={ReportActiveScreen}
+          options={{
+            title: "Aktualny raport",
           }}
         />
       </ReportTabNavigator.Navigator>

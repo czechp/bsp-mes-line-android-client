@@ -9,7 +9,7 @@ import colors from "../../configuration/colors";
 import AppProgressBar from "../../components/AppProgressBar/AppProgressBar";
 
 const ReportCard = ({ report }) => {
-  const productionStateColor = determineProductionColor(
+  const productionStateColor = determineProductionColor(    
     report.statistics.currentProductionPercent,
     report.statistics.expectedProductionPercent
   );
