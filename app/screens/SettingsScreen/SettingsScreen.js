@@ -6,7 +6,7 @@ import AppInfoCard from "../../components/AppInfoCard/AppInfoCard";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import systemConfiguration from "../../configuration/systemConfiguration";
 import axiosInstance, {
-  configureInterceptors,
+  configureInterceptors, uninterceptedAxiosInstance,
 } from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import showToast from "../../utilities/showToast";
@@ -91,7 +91,7 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   const updateAuthData = () => {
-    axiosInstance
+    uninterceptedAxiosInstance()
       .post("/appusers/login", { username: newUsername, password: newPassword })
       .then(async (response) => {
         saveConfigurationAuth();
