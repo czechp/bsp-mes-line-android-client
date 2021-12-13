@@ -20,8 +20,8 @@ const MainNavigator = () => {
           headerShown: false,        
         }}
       >
-        <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
         <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />

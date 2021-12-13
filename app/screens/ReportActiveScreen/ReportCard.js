@@ -14,6 +14,7 @@ const ReportCard = ({ report }) => {
     report.statistics.expectedProductionPercent
   );
 
+
   return (
     <View style={styles.container}>
       <ReportInfoRow info={{ title: "Id:", value: report.id }} />
@@ -119,13 +120,14 @@ const styles = StyleSheet.create({
 });
 
 const determineProductionColor = (currentPercent, expectPercent) => {
-  if (expectPercent >= 6) {
-    if (currentPercent >= expectPercent - 5) return colors.success;
-    else if (currentPercent > expectPercent - 10) return colors.warning;
 
-    return colors.danger;
-  }
-  return colors.primary;
+    const percentDifference = expectPercent - currentPercent;
+    if(percentDifference < 5)
+      return colors.success;
+    else if(percentDifference >=5 && percentDifference < 10)
+      return colors.warning;
+    else
+      return colors.danger;
 };
 
 export default ReportCard;
