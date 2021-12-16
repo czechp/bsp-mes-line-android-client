@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import { Modal, StyleSheet, View } from "react-native";
-import { useState } from "react/cjs/react.development";
 
 import AppButton from "../../components/AppButton/AppButton";
 import AppForm from "../../components/AppForm/AppForm";

@@ -1,5 +1,4 @@
-import React, { PureComponent } from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import React, { useEffect, useState  } from "react";
 
 import AppScreen from "../../components/AppScreen/AppScreen";
 import systemConfiguration from "../../configuration/systemConfiguration";

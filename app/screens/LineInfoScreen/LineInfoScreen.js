@@ -1,6 +1,5 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState  } from "react";
 import { StyleSheet } from "react-native";
-import { useEffect, useState } from "react/cjs/react.development";
 import AppRefreshButton from "../../components/AppRefreshButton/AppRefreshButton";
 
 import AppScreen from "../../components/AppScreen/AppScreen";

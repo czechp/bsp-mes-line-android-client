@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Modal,
@@ -10,7 +10,6 @@ import { AntDesign } from "@expo/vector-icons";
 
 import colors from "../../configuration/colors";
 import AppText from "../AppText/AppText";
-import { useState } from "react/cjs/react.development";
 import AppSeparator from "../AppSeparator/AppSeparator";
 
 const AppPicker = ({ title, value, values = [], onAssign }) => {

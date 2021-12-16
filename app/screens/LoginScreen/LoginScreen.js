@@ -10,8 +10,8 @@ import showToast from "../../utilities/showToast";
 import { uninterceptedAxiosInstance } from "../../utilities/axiosInstance";
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("codhaslo55");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const minDataLength = 3;
 
   const dataValidated =
