@@ -1,33 +1,41 @@
 import React, { useState } from "react";
 import { StyleSheet, ToastAndroid } from "react-native";
-import AppButton from "../../components/AppButton/AppButton";
 
+import AppButton from "../../components/AppButton/AppButton";
 import AppForm from "../../components/AppForm/AppForm";
 import AppScreen from "../../components/AppScreen/AppScreen";
 import AppTextInput from "../../components/AppTextInput/AppTextInput";
-import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import showToast from "../../utilities/showToast";
+import { uninterceptedAxiosInstance } from "../../utilities/axiosInstance";
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("codhaslo55");
   const minDataLength = 3;
 
   const dataValidated =
     username.length >= minDataLength && password.length >= minDataLength;
 
   const checkUserRole = (role) => {
-      if(role === "ADMIN")
-        navigation.navigate("SettingsScreen");
-      else
-        showToast("Masz zbyt niskie uprawnienia do konfiguracji tego urządzenia.");
-
+    if (role === "ADMIN") navigation.navigate("SettingsScreen");
+    else
+      showToast(
+        "Masz zbyt niskie uprawnienia do konfiguracji tego urządzenia."
+      );
   };
 
   const loginRequest = () => {
-    axiosInstance
-      .post("/appusers/login", { username, password })
+
+      uninterceptedAxiosInstance().post(
+        "/appusers/login",
+        { username: "admin", password: "codhaslo55" },
+        {
+          headers: {
+            Authorization: "",
+          },
+        }
+      )
       .then((response) => {
         checkUserRole(response.data.appUserRole);
       })

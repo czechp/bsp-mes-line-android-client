@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   container: {
     height: 2,
     width: "100%",
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
+    marginVertical: 10
   },
 });
 
