@@ -23,7 +23,7 @@ const LineInfoCard = ({ line = {} }) => {
         }}
       />
       <LineInfoRow data={{ title: "Produkt:", value: line.productName }} />
-      <LineInfoRow data={{ title: "Operator:", value: line.operator }} />
+      <LineInfoRow data={{ title: "Operator:", value: line.operator ? line.operator: "Brak" }} />
       <LineInfoRow
         data={{
           title: "Stan linii:",
