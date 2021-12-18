@@ -55,7 +55,7 @@ const ReportsClosedScreen = ({ navigation }) => {
 
 const ReportsClosedCard = ({ report }) => {
   return (
-    <View style={styles.card}>
+    <View style={{...styles.card, borderLeftColor: determineProductionColor(report)}}>
       <AppText style={styles.idText}>Id:{report.id}</AppText>
       <ReportClosedRow
         data={{ title: "Produkt:", value: report.productName }}
@@ -172,6 +172,8 @@ const determineProductionColor = (report) => {
 
 const styles = StyleSheet.create({
   card: {
+    borderLeftWidth: 15,
+    padding: 20,
     width: "100%",
     marginBottom: 20,
   },
