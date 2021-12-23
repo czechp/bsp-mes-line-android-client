@@ -26,10 +26,10 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const loginRequest = () => {
-
-      uninterceptedAxiosInstance().post(
+    uninterceptedAxiosInstance()
+      .post(
         "/appusers/login",
-        { username: "admin", password: "codhaslo55" },
+        { username, password },
         {
           headers: {
             Authorization: "",

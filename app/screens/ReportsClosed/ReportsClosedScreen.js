@@ -32,14 +32,10 @@ const ReportsClosedScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    //TODO remove it
-    const navSub = navigation.addListener("focus", () => {
-      setTimeout(() => {
-        getReportsRequest();
-      }, 500);
-
-      return navSub;
+    const navSub = navigation.addListener("focus", () => {       
+      getReportsRequest();
     });
+    return navSub;
   }, []);
 
   return (
