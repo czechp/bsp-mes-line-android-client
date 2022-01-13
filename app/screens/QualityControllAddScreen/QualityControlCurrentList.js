@@ -85,7 +85,7 @@ const QualityControlCard = ({ qualityControl }) => {
       <InfoRow title="Id:" data={qualityControl.id} />
       <InfoRow title="Wykonał:" data={qualityControl.inspector} />
       <InfoRow
-        title="Dział"
+        title="Dział:"
         data={translator.userRole(qualityControl.inspectorRole)}
       />
       <InfoRow

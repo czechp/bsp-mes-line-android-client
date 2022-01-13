@@ -21,8 +21,8 @@ const MainNavigator = () => {
           headerShown: false,        
         }}
       >
-        <Stack.Screen name="QualityControlNavigator" component={QualityControlNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen name="QualityControlNavigator" component={QualityControlNavigator} />
         <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
         <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
