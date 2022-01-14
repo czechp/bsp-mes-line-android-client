@@ -41,7 +41,7 @@ const QualityControlAddScreen = ({ navigation }) => {
 
   const getProductRequest = (productName) => {
     axiosInstance
-      .get(`/products/name/${productName}`)
+      .get(`/products/name`, { params: { productName } })
       .then((response) => {
         setProductProperties(response.data.productProperties);
       })
@@ -76,7 +76,12 @@ const QualityControlAddScreen = ({ navigation }) => {
       "Zapisywanie kontroli jakości",
       "Czy na pewno chcesz zapisać kontrole jakości?",
       [
-        { text: "Tak", onPress: () => {saveQualityControlRequest()} },
+        {
+          text: "Tak",
+          onPress: () => {
+            saveQualityControlRequest();
+          },
+        },
         { text: "Anuluj", style: "cancel" },
       ]
     );
@@ -91,7 +96,6 @@ const QualityControlAddScreen = ({ navigation }) => {
       .then((response) => {
         showToast("Kontrola jakości zapisana");
         navigation.navigate("QualityControlCurrentList");
-      
       })
       .catch((error) => {
         httpErrorHandler(error);
