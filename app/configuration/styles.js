@@ -15,6 +15,10 @@ export const fontSmallerStyles = {
   fontWeight: "bold",
 };
 
+export const sectionStyle = {
+  width: "100%"
+}
+
 export const colorByLineState = (state) => {
   switch (state) {
     case "ACTIVE":

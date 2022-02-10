@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import ReportActiveScreen from "../screens/ReportActiveScreen/ReportActiveScreen";
 import AppScreen from "../components/AppScreen/AppScreen";
-import ReportsClosedScreen from "../screens/ReportsClosed/ReportsClosedScreen";
+import ReportsClosedScreen from "../screens/ReportClosedScreen/ReportsClosedScreen";
 
 const ReportTabNavigator = createMaterialTopTabNavigator();
 
