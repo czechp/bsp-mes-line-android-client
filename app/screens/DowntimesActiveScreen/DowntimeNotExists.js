@@ -60,7 +60,7 @@ const DowntimeNotExistsList = ({ downtimeList = [], newDowntimeOnAssign }) => {
 const DowntimeNotExistsResult = ({newDowntime}) => {
     return (<View style={styles.resultSection}>
         <AppText style={styles.choosenDowtimeText}>Wybrany przestój:</AppText>
-        <AppText style={{...styles.choosenDowtimeText, color: colors.warning}}>{newDowntime}</AppText>
+        <AppText style={{...styles.choosenDowtimeText}}>{newDowntime}</AppText>
         {/* TODO: make request to backend in order to create a new downtime */}
         <AppButton title="Zapisz" color="success" onPress={()=>{}}/>
     </View>)
@@ -71,7 +71,7 @@ const DowntimeRow = ({ downtime, newDowntimeOnAssign }) => {
     <View style={{ paddingTop: 20 }}>
       <View style={styles.downtimeRow}>
         <AppText
-          style={{ textAlign: "left", ...fontLargerStyles, width: "60%", color: colors.warning }}
+          style={{ textAlign: "left", ...fontLargerStyles, width: "60%"}}
         >
           {downtime.content}
         </AppText>
