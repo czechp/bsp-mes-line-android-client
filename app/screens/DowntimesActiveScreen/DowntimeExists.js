@@ -45,7 +45,8 @@ export const DowntimeExistsInfo = ({ downtime, title="Akutalny przestój" }) => 
       data={[
         { title: "Id:", value: downtime.id },
         { title: "Stworzone przez: ", value: downtime.operatorName },
-        { title: "Data utworzenia: ", value: dateFormatter() },
+        { title: "Data utworzenia: ", value: dateFormatter(downtime.creationDate) },
+        {title: "Data zakończenia: ", value: downtime.closeDate ? dateFormatter(downtime.closeDate): "Postój w toku"},
         { title: "Przestój: ", value: downtime.content },
         { title: "Czas trwania: ", value: `${downtime.totalMinutes} min` },
       ]}
