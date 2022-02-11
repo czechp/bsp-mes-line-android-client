@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { fontLargerStyles, sectionStyle } from "../../configuration/styles";
 import AppText from "../../components/AppText/AppText";
@@ -21,7 +21,10 @@ const DowntimeNotExists = ({ downtimes = [], saveDowntime }) => {
         downtimeList={downtimes}
         newDowntimeOnAssign={setNewDowntime}
       />
-      <DowntimeNotExistsResult newDowntime={newDowntime} saveDowntime={saveDowntime}/>
+      <DowntimeNotExistsResult
+        newDowntime={newDowntime}
+        saveDowntime={saveDowntime}
+      />
     </View>
   );
 };
@@ -57,12 +60,36 @@ const DowntimeNotExistsList = ({ downtimeList = [], newDowntimeOnAssign }) => {
   );
 };
 
-const DowntimeNotExistsResult = ({newDowntime, saveDowntime}) => {
-    return (<View style={styles.resultSection}>
-        <AppText style={styles.choosenDowtimeText}>Wybrany przestój:</AppText>
-        <AppText style={{...styles.choosenDowtimeText}}>{newDowntime}</AppText>
-        <AppButton title="Zapisz" color="success" onPress={()=>{saveDowntime(newDowntime)}}/>
-    </View>)
+const DowntimeNotExistsResult = ({ newDowntime, saveDowntime }) => {
+  const createDowntimeOnPress = () => {
+    Alert.alert(
+      "Zapisywanie noweg przestoju produkcyjnego",
+      "Czy napewno chcesz zapisać nowy przestój produkcyjny?",
+      [
+        {
+          text: "Zapisz",
+          onPress: () => {
+            saveDowntime(newDowntime);
+          },
+        },
+        {
+          text: "Anuluj",
+          onPress: () => {},
+        },
+      ]
+    );
+  };
+  return (
+    <View style={styles.resultSection}>
+      <AppText style={styles.choosenDowtimeText}>Wybrany przestój:</AppText>
+      <AppText style={{ ...styles.choosenDowtimeText }}>{newDowntime}</AppText>
+      <AppButton
+        title="Zapisz"
+        color="success"
+        onPress={createDowntimeOnPress}
+      />
+    </View>
+  );
 };
 
 const DowntimeRow = ({ downtime, newDowntimeOnAssign }) => {
@@ -70,7 +97,7 @@ const DowntimeRow = ({ downtime, newDowntimeOnAssign }) => {
     <View style={{ paddingTop: 20 }}>
       <View style={styles.downtimeRow}>
         <AppText
-          style={{ textAlign: "left", ...fontLargerStyles, width: "60%"}}
+          style={{ textAlign: "left", ...fontLargerStyles, width: "60%" }}
         >
           {downtime.content}
         </AppText>
@@ -97,13 +124,13 @@ const styles = StyleSheet.create({
   },
   resultSection: {
     justifyContent: "space-between",
-    flex:0.3
+    flex: 0.3,
   },
 
   choosenDowtimeText: {
-      textAlign: "center",
-      ... fontLargerStyles
-  }
+    textAlign: "center",
+    ...fontLargerStyles,
+  },
 });
 
 export default DowntimeNotExists;

@@ -5,6 +5,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ReportActiveScreen from "../screens/ReportActiveScreen/ReportActiveScreen";
 import AppScreen from "../components/AppScreen/AppScreen";
 import DownTimeActiveScreen from "../screens/DowntimesActiveScreen/DowntimeActiveScreen";
+import DowntimesListScreen from "../screens/DowntimesListScreen/DowntimesListScreen";
 
 const DownTimeNavigator = createMaterialTopTabNavigator();
 
@@ -19,7 +20,13 @@ const DowntimeNavigator = ({ navigation }) => {
             title: "Aktualny przestój",
           }}
         />
-
+        <DownTimeNavigator.Screen
+          name="DowntimesListScreen"
+          component={DowntimesListScreen}
+          options={{
+            title: "List zakończonych przestojów",
+          }}
+        />
       </DownTimeNavigator.Navigator>
     </AppScreen>
   );

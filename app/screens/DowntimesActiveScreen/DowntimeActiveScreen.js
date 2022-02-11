@@ -8,13 +8,14 @@ import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import DowntimeNotExists from "./DowntimeNotExists";
 import showToast from "../../utilities/showToast";
+import DowntimeExists from "./DowntimeExists";
 
 const DownTimeActiveScreen = ({ navigation }) => {
   const [activeDowntime, setActiveDowntime] = useState();
   const [downtimes, setDowntimes] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const getDowntimeRequest = () => {
+  const getDowntimesRequest = () => {
     axiosInstance
       .get(`/downtimes/line/${systemConfiguration.lineId.value}`)
       .then((response) => {
@@ -34,6 +35,7 @@ const DownTimeActiveScreen = ({ navigation }) => {
         })
         .then((response) => {
           showToast("Stworzono nowy postój produkcyjny.");
+          getActiveDowntimeRequest();
         })
         .catch((error) => {
           httpErrorHandler(error);
@@ -41,7 +43,8 @@ const DownTimeActiveScreen = ({ navigation }) => {
     } else showToast("Zdefiniowany przestój produkcyjne jest za krótki.");
   };
 
-  const getActiveDowntime = () => {
+  const getActiveDowntimeRequest = () => {
+    setDataLoaded(false);
     axiosInstance
       .get(`/downtimes-executed/line/${systemConfiguration.lineId.value}`)
       .then((response) => {
@@ -49,18 +52,30 @@ const DownTimeActiveScreen = ({ navigation }) => {
       })
       .catch((error) => {
         if (error.response.status !== 404) httpErrorHandler(error);
+        else setActiveDowntime(null);
+      })
+      .finally(() => setDataLoaded(true));
+  };
+
+  const closeDowntimeRequest = () => {
+    axiosInstance
+      .patch(`/downtimes-executed/status/close/${activeDowntime.id}`)
+      .then((response) => {
+        showToast("Przestój zakończony z powodzeniem.");
+        navigation.navigate("DowntimesListScreen");
+      })
+      .catch((error) => {
+        httpErrorHandler(error);
       });
   };
 
   useEffect(() => {
     setDataLoaded(false);
-    //TODO: "move it into navigation.listener and remove timeout"
-    setTimeout(() => {
-      getDowntimeRequest();
-      getActiveDowntime();
-    }, 2000);
 
-    return navigation.addListener("focus", () => {});
+    return navigation.addListener("focus", () => {
+      getDowntimesRequest();
+      getActiveDowntimeRequest();
+    });
   }, []);
 
   return (
@@ -69,6 +84,14 @@ const DownTimeActiveScreen = ({ navigation }) => {
         <DowntimeNotExists
           downtimes={downtimes}
           saveDowntime={createNewDowntimeRequest}
+        />
+      )}
+
+      {activeDowntime && (
+        <DowntimeExists
+          downtime={activeDowntime}
+          refresh={getActiveDowntimeRequest}
+          closeDowntime={closeDowntimeRequest}
         />
       )}
     </AppScreen>
