@@ -8,7 +8,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import AppSeparator from "../../components/AppSeparator/AppSeparator";
 import AppButton from "../../components/AppButton/AppButton";
 
-const DowntimeNotExists = ({ downtimes = [] }) => {
+const DowntimeNotExists = ({ downtimes = [], saveDowntime }) => {
   const [newDowntime, setNewDowntime] = useState("");
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const DowntimeNotExists = ({ downtimes = [] }) => {
         downtimeList={downtimes}
         newDowntimeOnAssign={setNewDowntime}
       />
-      <DowntimeNotExistsResult newDowntime={newDowntime}/>
+      <DowntimeNotExistsResult newDowntime={newDowntime} saveDowntime={saveDowntime}/>
     </View>
   );
 };
@@ -57,12 +57,11 @@ const DowntimeNotExistsList = ({ downtimeList = [], newDowntimeOnAssign }) => {
   );
 };
 
-const DowntimeNotExistsResult = ({newDowntime}) => {
+const DowntimeNotExistsResult = ({newDowntime, saveDowntime}) => {
     return (<View style={styles.resultSection}>
         <AppText style={styles.choosenDowtimeText}>Wybrany przestój:</AppText>
         <AppText style={{...styles.choosenDowtimeText}}>{newDowntime}</AppText>
-        {/* TODO: make request to backend in order to create a new downtime */}
-        <AppButton title="Zapisz" color="success" onPress={()=>{}}/>
+        <AppButton title="Zapisz" color="success" onPress={()=>{saveDowntime(newDowntime)}}/>
     </View>)
 };
 
