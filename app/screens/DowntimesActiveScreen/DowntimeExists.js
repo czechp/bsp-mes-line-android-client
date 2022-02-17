@@ -40,7 +40,7 @@ const DowntimeExists = ({ downtime, refresh, closeDowntime }) => {
 
 export const DowntimeExistsInfo = ({
   downtime,
-  title = "Akutalny przestój",
+  title = "Aktualny przestój",
 }) => {
   return (
     <AppInfoCard

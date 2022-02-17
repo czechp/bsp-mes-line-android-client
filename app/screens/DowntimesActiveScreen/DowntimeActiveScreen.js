@@ -46,7 +46,7 @@ const DownTimeActiveScreen = ({ navigation }) => {
   const getActiveDowntimeRequest = () => {
     setDataLoaded(false);
     axiosInstance
-      .get(`/downtimes-executed/line/${systemConfiguration.lineId.value}`)
+      .get(`/downtimes-executed/status/open/line/${systemConfiguration.lineId.value}`)
       .then((response) => {
         setActiveDowntime(response.data);
       })
