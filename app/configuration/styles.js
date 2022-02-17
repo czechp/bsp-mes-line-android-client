@@ -1,19 +1,23 @@
 import colors from "./colors";
 
 export const fontStyles = {
-  fontSize: 25,
+  fontSize: 20,
   color: colors.primary,
 };
 
 export const fontLargerStyles = {
-  fontSize: 30,
+  fontSize: 25,
   fontWeight: "bold",
 };
 
 export const fontSmallerStyles = {
-  fontSize: 20,
+  fontSize: 15,
   fontWeight: "bold",
 };
+
+export const sectionStyle = {
+  width: "100%"
+}
 
 export const colorByLineState = (state) => {
   switch (state) {

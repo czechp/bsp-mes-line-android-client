@@ -22,7 +22,6 @@ const ReportActiveScreen = ({ navigation }) => {
         getActiveReportRequest();
       })
       .catch((error) => {
-        console.log(error)
         httpErrorHandler(error);
       })
       .finally(() => setDataLoaded(true));

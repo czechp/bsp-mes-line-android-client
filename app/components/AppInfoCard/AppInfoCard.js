@@ -9,20 +9,22 @@ const AppInfoCard = ({ title, data = [] }) => {
     <View style={styles.container}>
       <AppText style={styles.title}> {title} </AppText>
       <FlatList
-      data={data}
-      keyExtractor={(item, index)=>`${item.title}-${item.value}-${index}`} 
-      renderItem={({item})=><AppInfoCardRow data={item} />}
+        data={data}
+        keyExtractor={(item, index) => `${item.title}-${item.value}-${index}`}
+        renderItem={({ item }) => <AppInfoCardRow data={item} />}
       />
-      <AppSeparator style={{marginVertical: 20}} />
+      <AppSeparator style={{ marginVertical: 20 }} />
     </View>
   );
 };
 
 const AppInfoCardRow = ({ data }) => {
-  return <View style={styles.infoRow}>
+  return (
+    <View style={styles.infoRow}>
       <AppText>{data.title}</AppText>
       <AppText>{data.value}</AppText>
-  </View>;
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: 10
+    marginVertical: 10,
   },
   title: {
     ...fontLargerStyles,

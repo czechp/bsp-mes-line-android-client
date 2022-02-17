@@ -38,6 +38,15 @@ const translator = {
         return "Błąd nie rozpoznano";
     }
   },
+
+  userRole: (role)=>{
+    switch(role){
+      case "PRODUCTION": return "Produkcja";
+      case "QUALITY_CONTROL": return "Kontrola jakości";
+      case "MAINTENANCE": return "Utrzymanie ruchu";
+      default: return "Błąd. Nie rozpoznano";
+    }
+  }
 };
 
 export default translator;

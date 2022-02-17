@@ -24,10 +24,19 @@ const MenuScreen = ({ navigation }) => {
           title="Produkty"
           onPress={() => navigation.navigate("ProductsScreen")}
         />
-        <AppButton title="Raporty"
-        onPress={()=>navigation.navigate("ReportNavigator")} />
-        <AppButton title="Kontrola jakości" />
-        <AppButton title="Przestoje produkcyjne" />
+        <AppButton
+          title="Raporty"
+          onPress={() => navigation.navigate("ReportNavigator")}
+        />
+        <AppButton
+          title="Kontrola jakości"
+          onPress={() => navigation.navigate("QualityControlNavigator")}
+        />
+        <AppButton
+          title="Przestoje produkcyjne"
+          onPress={() => navigation.navigate("DowntimeNavigator")}
+        />
+        <AppButton title="Awarie" />
         <AppButton
           title="Ustawienia"
           onPress={() => navigation.navigate("SettingsLoginScreen")}

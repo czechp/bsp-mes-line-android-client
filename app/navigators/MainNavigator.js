@@ -9,6 +9,8 @@ import SettingsScreen from "../screens/SettingsScreen/SettingsScreen";
 import ProductsScreen from "../screens/ProductsScreen/ProductsScreen";
 import LineInfoScreen from "../screens/LineInfoScreen/LineInfoScreen";
 import ReportNavigator from "./ReportNavigator";
+import DowntimeNavigator from "./DowntimeNavigator";
+import QualityControlNavigator from "./QualityControlNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const MainNavigator = () => {
         }}
       >
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen name="DowntimeNavigator" component={DowntimeNavigator} />
+        <Stack.Screen name="QualityControlNavigator" component={QualityControlNavigator} />
         <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
         <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
