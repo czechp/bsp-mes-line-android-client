@@ -7,6 +7,7 @@ import axiosInstance from "./../../utilities/axiosInstance";
 import systemConfiguration from "../../configuration/systemConfiguration";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
 import showToast from "../../utilities/showToast";
+import BreakdownNotExists from "./BreakdownNotExists";
 
 const BreakdownActiveScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -21,7 +22,7 @@ const BreakdownActiveScreen = ({ navigation }) => {
         if (response.data.length > 0) setBreakdown(response.data[0]);
       })
       .catch((error) => {
-        httpErrorHandler(error);
+        if (error.response.status !== 404) httpErrorHandler(error);
       })
       .finally(() => setDataLoaded(true));
   };
@@ -49,6 +50,16 @@ const BreakdownActiveScreen = ({ navigation }) => {
       .catch((error) => httpErrorHandler(error));
   };
 
+  const createNewBreakdownRequest = (content) => {
+    axiosInstance
+      .post(`/breakdowns/line/${systemConfiguration.lineId.value}`, { content })
+      .then((response) => {
+        showToast("Awaria została utworzona.");
+        getActiveBreakdownRequest();
+      })
+      .catch((error) => httpErrorHandler(error));
+  };
+
   useEffect(() => {
     return navigation.addListener("focus", () => {
       getActiveBreakdownRequest();
@@ -65,7 +76,7 @@ const BreakdownActiveScreen = ({ navigation }) => {
           closeBreakdown={patchCloseBreakdwonRequest}
         />
       )}
-      {!breakdown && <Text>Nie istnieje</Text>}
+      {!breakdown && <BreakdownNotExists createNewBreakdown={createNewBreakdownRequest}/>}
     </AppScreen>
   );
 };
