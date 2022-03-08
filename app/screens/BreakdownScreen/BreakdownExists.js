@@ -31,7 +31,7 @@ const BreakdownExists = ({ breakdown, maintenanceArrived, getBreakdown, closeBre
 };
 
 const BreakdownExistsStartForm = ({ maintenanceArrived }) => {
-  const [umupNumber, setUmupNumber] = useState("M");
+  const [umupNumber, setUmupNumber] = useState("");
   const confirmStartingOnClick = () => {
     if (umupNumber.length >= 3) {
       Alert.alert(
