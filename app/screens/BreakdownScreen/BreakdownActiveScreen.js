@@ -6,6 +6,7 @@ import BreakdownExists from "./BreakdownExists";
 import axiosInstance from "./../../utilities/axiosInstance";
 import systemConfiguration from "../../configuration/systemConfiguration";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
+import showToast from "../../utilities/showToast";
 
 const BreakdownActiveScreen = ({ navigation }) => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -38,6 +39,16 @@ const BreakdownActiveScreen = ({ navigation }) => {
       .catch((error) => httpErrorHandler(error));
   };
 
+  const patchCloseBreakdwonRequest = () => {
+    axiosInstance
+      .patch(`/breakdowns/status/close/${breakdown.id}`, {})
+      .then((response) => {
+        showToast("Awaria zakończona z powodzeniem");
+        getActiveBreakdownRequest();
+      })
+      .catch((error) => httpErrorHandler(error));
+  };
+
   useEffect(() => {
     return navigation.addListener("focus", () => {
       getActiveBreakdownRequest();
@@ -50,6 +61,8 @@ const BreakdownActiveScreen = ({ navigation }) => {
         <BreakdownExists
           breakdown={breakdown}
           maintenanceArrived={patchMaintenanceArrivedRequest}
+          getBreakdown={getActiveBreakdownRequest}
+          closeBreakdown={patchCloseBreakdwonRequest}
         />
       )}
       {!breakdown && <Text>Nie istnieje</Text>}
