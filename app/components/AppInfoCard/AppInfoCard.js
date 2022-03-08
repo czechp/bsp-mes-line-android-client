@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   title: {
     ...fontLargerStyles,
     textAlign: "center",
-    marginBottom: 40,
   },
 });
 

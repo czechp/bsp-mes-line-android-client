@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import AppScreen from "../components/AppScreen/AppScreen";
 import BreakdownActiveScreen from "../screens/BreakdownScreen/BreakdownActiveScreen";
+import BreakdownListScreen from "../screens/BreakdownListScreen/BreakdownListScreen";
 
 const BreakdownTabNavigator = createMaterialTopTabNavigator();
 
@@ -15,6 +16,13 @@ const BreakdownNavigator = ({ navigation }) => {
          component={BreakdownActiveScreen}
          options={{
              title:"Aktualna awaria"
+         }}
+        />
+         <BreakdownTabNavigator.Screen
+         name="BreakdownListScreen" 
+         component={BreakdownListScreen}
+         options={{
+             title:"Lista awarii"
          }}
         />
       </BreakdownTabNavigator.Navigator>

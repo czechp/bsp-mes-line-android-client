@@ -45,7 +45,7 @@ const BreakdownActiveScreen = ({ navigation }) => {
       .patch(`/breakdowns/status/close/${breakdown.id}`, {})
       .then((response) => {
         showToast("Awaria zakończona z powodzeniem");
-        getActiveBreakdownRequest();
+        navigation.navigate("BreakdownListScreen")
       })
       .catch((error) => httpErrorHandler(error));
   };

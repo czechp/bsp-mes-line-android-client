@@ -6,7 +6,7 @@ import translator from "../../utilities/translators";
 
 const BreakdownCard = ({ breakdown }) => {
   return (
-    <View style={{width: "100%"}}>
+    <View style={{ width: "100%" }}>
       <AppInfoCard
         data={[
           { title: "Id:", value: breakdown.id },
@@ -17,7 +17,9 @@ const BreakdownCard = ({ breakdown }) => {
           { title: "Zgłaszający: ", value: breakdown.operatorName },
           {
             title: "Pracownik UR: ",
-            value: breakdown.maintenanceName ? breakdown.maintenanceName : "Oczekiwanie na przybycie",
+            value: breakdown.maintenanceName
+              ? breakdown.maintenanceName
+              : "Oczekiwanie na przybycie",
           },
           {
             title: "Czas zgłoszenia: ",
@@ -47,6 +49,7 @@ const BreakdownCard = ({ breakdown }) => {
             title: "Numer zgłoszenia UMUP:",
             value: breakdown.umupNumber ? breakdown.umupNumber : "Brak",
           },
+          { title: "Opis awarii:", value: breakdown.content },
         ]}
       />
     </View>
