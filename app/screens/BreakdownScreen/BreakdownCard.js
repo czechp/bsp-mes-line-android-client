@@ -38,7 +38,7 @@ const BreakdownCard = ({ breakdown }) => {
               : "Brak",
           },
           {
-            title: "Minut od przybycia UR:",
+            title: "Minut do przybycia UR:",
             value: breakdown.maintenanceArrivedTotalTime + " min.",
           },
           {
