@@ -36,7 +36,10 @@ const MenuScreen = ({ navigation }) => {
           title="Przestoje produkcyjne"
           onPress={() => navigation.navigate("DowntimeNavigator")}
         />
-        <AppButton title="Awarie" />
+        <AppButton
+          title="Awarie"
+          onPress={() => navigation.navigate("BreakdownNavigator")}
+        />
         <AppButton
           title="Ustawienia"
           onPress={() => navigation.navigate("SettingsLoginScreen")}

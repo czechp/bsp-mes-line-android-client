@@ -39,14 +39,31 @@ const translator = {
     }
   },
 
-  userRole: (role)=>{
-    switch(role){
-      case "PRODUCTION": return "Produkcja";
-      case "QUALITY_CONTROL": return "Kontrola jakości";
-      case "MAINTENANCE": return "Utrzymanie ruchu";
-      default: return "Błąd. Nie rozpoznano";
+  userRole: (role) => {
+    switch (role) {
+      case "PRODUCTION":
+        return "Produkcja";
+      case "QUALITY_CONTROL":
+        return "Kontrola jakości";
+      case "MAINTENANCE":
+        return "Utrzymanie ruchu";
+      default:
+        return "Błąd. Nie rozpoznano";
     }
-  }
+  },
+
+  breakdownStatus: (breakdownStatus) => {
+    switch (breakdownStatus) {
+      case "NEW":
+        return "Oczekiwanie na UR";
+      case "IN_PROGRESS":
+        return "Usuwanie awarii";
+      case "CLOSE":
+        return "Zakończona";
+      default:
+        return "Nie rozpoznano";
+    }
+  },
 };
 
 export default translator;
