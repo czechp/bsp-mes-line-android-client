@@ -20,15 +20,21 @@ const MainNavigator = () => {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,        
+          headerShown: false,
         }}
       >
-        <Stack.Screen name="BreakdownNavigator" component={BreakdownNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen name="DowntimeNavigator" component={DowntimeNavigator} />
-        <Stack.Screen name="QualityControlNavigator" component={QualityControlNavigator} />
+        <Stack.Screen
+          name="QualityControlNavigator"
+          component={QualityControlNavigator}
+        />
         <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
-        <Stack.Screen name="LineInfoScreen" component={LineInfoScreen}/>
+        <Stack.Screen
+          name="BreakdownNavigator"
+          component={BreakdownNavigator}
+        />
+        <Stack.Screen name="LineInfoScreen" component={LineInfoScreen} />
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
         <Stack.Screen name="SettingsLoginScreen" component={LoginScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
