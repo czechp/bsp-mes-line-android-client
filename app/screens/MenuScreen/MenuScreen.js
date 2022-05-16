@@ -28,6 +28,10 @@ const MenuScreen = ({ navigation }) => {
           title="Raporty"
           onPress={() => navigation.navigate("ReportNavigator")}
         />
+                <AppButton
+          title="Surowce"
+          onPress={() => navigation.navigate("RawMaterialNavigator")}
+        />
         <AppButton
           title="Kontrola jakości"
           onPress={() => navigation.navigate("QualityControlNavigator")}
