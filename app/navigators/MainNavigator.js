@@ -24,6 +24,7 @@ const MainNavigator = () => {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="RawMaterialNavigator" component={RawMaterialNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen name="DowntimeNavigator" component={DowntimeNavigator} />
         <Stack.Screen
@@ -31,7 +32,6 @@ const MainNavigator = () => {
           component={QualityControlNavigator}
         />
         <Stack.Screen name="ReportNavigator" component={ReportNavigator} />
-        <Stack.Screen name="RawMaterialNavigator" component={RawMaterialNavigator} />
         <Stack.Screen
           name="BreakdownNavigator"
           component={BreakdownNavigator}

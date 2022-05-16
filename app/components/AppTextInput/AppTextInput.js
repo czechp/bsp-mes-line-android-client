@@ -5,7 +5,7 @@ import AppText from "../AppText/AppText";
 import colors from "../../configuration/colors";
 import { fontStyles } from "../../configuration/styles";
 
-const AppTextInput = ({ title = "", minLength, ...otherProps }) => {
+const AppTextInput = ({ title = "", minLength, inputStyles={}, ...otherProps }) => {
   const [alreadyTouched, setAlreadyTouched] = useState(false);
 
   const minLengthValidatorText = minLength
@@ -19,7 +19,7 @@ const AppTextInput = ({ title = "", minLength, ...otherProps }) => {
     <View style={styles.container}>
       <AppText style={styles.title}>{title}</AppText>
       <TextInput
-        style={styles.textInput}
+        style={{...styles.textInput, ...inputStyles}}
         {...otherProps}
         onFocus={() => setAlreadyTouched(true)}
       />

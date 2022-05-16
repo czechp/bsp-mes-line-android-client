@@ -1,4 +1,6 @@
 import React from "react";
+import { StyleSheet } from "react-native";
+
 import AppScreen from "../../components/AppScreen/AppScreen";
 
 const RawMaterialListScreen = () => {
@@ -6,4 +8,6 @@ const RawMaterialListScreen = () => {
     
 };
 
+
+const styles = StyleSheet.create({});
 export default RawMaterialListScreen;
