@@ -1,29 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { sin } from "react-native/Libraries/Animated/Easing";
 
 import AppButton from "../../components/AppButton/AppButton";
 import AppInfoCard from "../../components/AppInfoCard/AppInfoCard";
 import AppScreen from "../../components/AppScreen/AppScreen";
-import AppText from "../../components/AppText/AppText";
 import AppTextInput from "../../components/AppTextInput/AppTextInput";
 import systemConfiguration from "../../configuration/systemConfiguration";
 import axiosInstance from "../../utilities/axiosInstance";
 import httpErrorHandler from "../../utilities/httpErrorHandler";
+import showToast from "../../utilities/showToast";
 
 const RawMaterialAddScreen = ({ navigation }) => {
-  const [newMaterial, setNewmaterial] = useState({
-    systemId: 1,
-    name: "2",
-    provider: "3",
-    partNr: "4",
-    date: "5",
+  const MIN_TEXT_LENGTH = 3;
+  const [newMaterial, setNewMaterial] = useState({
+    systemId: "",
+    name: "",
+    provider: "",
+    partNr: "",
+    date: "",
   });
 
   const [materials, setMaterials] = useState([]);
 
   const setNewMaterialFromTemplate = ({ systemId, name, provider }) => {
-    setNewmaterial({ ...newMaterial, systemId, name, provider });
+    setNewMaterial({
+      ...newMaterial,
+      systemId: systemId.toString(),
+      name,
+      provider,
+    });
   };
+
+  const clearForm = () => {
+    setNewMaterial({
+      systemId: "",
+      name: "",
+      provider: "",
+      partNr: "",
+      date: "",
+    });
+  };
+
+  const formValidated = () => {
+    const nameValidated = singleFieldFormValidated(newMaterial.name);
+    const providerValidated = singleFieldFormValidated(newMaterial.provider);
+
+    return nameValidated && providerValidated;
+  };
+
+  const singleFieldFormValidated = (text, length = MIN_TEXT_LENGTH) => {
+    return text.length >= length;
+  };
+
   const getMaterialsRequest = () => {
     axiosInstance
       .get(`/raw-materials/line/${systemConfiguration.lineId.value}`)
@@ -31,6 +60,15 @@ const RawMaterialAddScreen = ({ navigation }) => {
         setMaterials(
           response.data.sort((el1, el2) => el1.name.localeCompare(el2.name))
         );
+      })
+      .catch((error) => httpErrorHandler(error));
+  };
+
+  const addNewMaterialRequest = (body) => {
+    axiosInstance
+      .post("/used-raw-materials", body)
+      .then((response) => {
+        showToast("Pobrany surowiec został dodany");
       })
       .catch((error) => httpErrorHandler(error));
   };
@@ -46,7 +84,12 @@ const RawMaterialAddScreen = ({ navigation }) => {
 
   return (
     <AppScreen title="Dodaj pobrany surowiec">
-      <AddForm newMaterial={newMaterial} setNewMaterial={setNewmaterial} />
+      <AddForm
+        newMaterial={newMaterial}
+        setNewMaterial={setNewMaterial}
+        formValidated={formValidated()}
+        addNewMaterial={addNewMaterialRequest}
+      />
       <MaterialList
         materials={materials}
         setNewMaterial={setNewMaterialFromTemplate}
@@ -55,20 +98,31 @@ const RawMaterialAddScreen = ({ navigation }) => {
   );
 };
 
-const AddForm = ({ newMaterial, setNewMaterial }) => {
+const AddForm = ({
+  newMaterial,
+  setNewMaterial,
+  formValidated,
+  addNewMaterial,
+}) => {
   const addNewMaterialOnPress = () => {
-    //TODO: implement it
+    const systemId = parseInt(newMaterial.systemId);
+    if(isNaN(systemId)){
+      showToast("Erp Id musi być liczbą");
+      return;
+    }
+    const body = {...newMaterial, lineId:systemConfiguration.lineId.value, systemId};
+    addNewMaterial(body);
   };
+
   return (
     <View style={styles.addFormContainer}>
       <View style={styles.addFromRow}>
         <AppTextInput
-          title="Erp Id:"
-          minLength={3}
+          title="Erp id:"
           inputStyles={{ width: "50%" }}
           value={newMaterial.systemId.toString()}
-          onChange={(text) =>
-            setNewMaterial({ ...newMaterial, systemId: parseInt(text) })
+          onChangeText={(text) =>
+            setNewMaterial({ ...newMaterial, systemId: text })
           }
         />
         <AppTextInput
@@ -76,7 +130,9 @@ const AddForm = ({ newMaterial, setNewMaterial }) => {
           minLength={3}
           inputStyles={{ width: "50%" }}
           value={newMaterial.name}
-          onChange={(text) => setNewMaterial({ ...newMaterial, name: text })}
+          onChangeText={(text) =>
+            setNewMaterial({ ...newMaterial, name: text })
+          }
         />
       </View>
       <View style={styles.addFromRow}>
@@ -85,7 +141,7 @@ const AddForm = ({ newMaterial, setNewMaterial }) => {
           minLength={3}
           inputStyles={{ width: "50%" }}
           value={newMaterial.provider}
-          onChange={(text) =>
+          onChangeText={(text) =>
             setNewMaterial({ ...newMaterial, provider: text })
           }
         />
@@ -93,16 +149,24 @@ const AddForm = ({ newMaterial, setNewMaterial }) => {
           title="Nr.partii:"
           inputStyles={{ width: "50%" }}
           value={newMaterial.partNr}
-          onChange={(text) => setNewMaterial({ ...newMaterial, partNr: text })}
+          onChangeText={(text) =>
+            setNewMaterial({ ...newMaterial, partNr: text })
+          }
         />
       </View>
       <AppTextInput
         title="Data:"
         inputStyles={{ width: "50%" }}
         value={newMaterial.date}
-        onChange={(text) => setNewMaterial({ ...newMaterial, date: text })}
+        onChangeText={(text) =>
+          setNewMaterial({ ...newMaterial, date: text })
+        }
       />
-      <AppButton title="Dodaj" onPress={addNewMaterialOnPress} />
+      <AppButton
+        title="Dodaj"
+        onPress={addNewMaterialOnPress}
+        disabled={!formValidated}
+      />
     </View>
   );
 };
@@ -126,7 +190,7 @@ const MaterialRow = ({ material, setNewMaterial }) => {
     <TouchableOpacity onPress={() => setNewMaterial(material)}>
       <AppInfoCard
         data={[
-          { title: "Erp ID:", value: material.systemId },
+          { title: "Erp Id:", value: material.systemId },
           { title: "Nazwa:", value: material.name },
           { title: "Dostawca:", value: material.provider },
         ]}
