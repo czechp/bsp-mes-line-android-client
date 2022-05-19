@@ -24,8 +24,11 @@ const MainNavigator = () => {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="RawMaterialNavigator" component={RawMaterialNavigator} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen
+          name="RawMaterialNavigator"
+          component={RawMaterialNavigator}
+        />
         <Stack.Screen name="DowntimeNavigator" component={DowntimeNavigator} />
         <Stack.Screen
           name="QualityControlNavigator"

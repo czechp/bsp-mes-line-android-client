@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
-import { sin } from "react-native/Libraries/Animated/Easing";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 
 import AppButton from "../../components/AppButton/AppButton";
 import AppInfoCard from "../../components/AppInfoCard/AppInfoCard";
@@ -69,15 +74,14 @@ const RawMaterialAddScreen = ({ navigation }) => {
       .post("/used-raw-materials", body)
       .then((response) => {
         showToast("Pobrany surowiec został dodany");
+        clearForm();
       })
       .catch((error) => httpErrorHandler(error));
   };
 
   useEffect(() => {
     const navSub = navigation.addListener("focus", () => {
-      setTimeout(() => {
-        getMaterialsRequest();
-      }, 1000);
+      getMaterialsRequest();
     });
     return navSub;
   }, []);
@@ -105,13 +109,28 @@ const AddForm = ({
   addNewMaterial,
 }) => {
   const addNewMaterialOnPress = () => {
-    const systemId = parseInt(newMaterial.systemId);
-    if(isNaN(systemId)){
-      showToast("Erp Id musi być liczbą");
-      return;
-    }
-    const body = {...newMaterial, lineId:systemConfiguration.lineId.value, systemId};
-    addNewMaterial(body);
+    const addNewMaterialAccept = () => {
+      const systemId = parseInt(newMaterial.systemId);
+      if (isNaN(systemId)) {
+        showToast("Erp Id musi być liczbą");
+        return;
+      }
+      const body = {
+        ...newMaterial,
+        lineId: systemConfiguration.lineId.value,
+        systemId,
+      };
+      addNewMaterial(body);
+    };
+
+    Alert.alert(
+      "Dodawanie pobranego surowca",
+      "Czy na pewno chcesz dodać nowy pobrany surowiec?",
+      [
+        { text: "Dodaj", onPress: addNewMaterialAccept },
+        { text: "Anuluj", style: "cancel" },
+      ]
+    );
   };
 
   return (
@@ -158,9 +177,7 @@ const AddForm = ({
         title="Data:"
         inputStyles={{ width: "50%" }}
         value={newMaterial.date}
-        onChangeText={(text) =>
-          setNewMaterial({ ...newMaterial, date: text })
-        }
+        onChangeText={(text) => setNewMaterial({ ...newMaterial, date: text })}
       />
       <AppButton
         title="Dodaj"
@@ -200,7 +217,7 @@ const MaterialRow = ({ material, setNewMaterial }) => {
 };
 const styles = StyleSheet.create({
   addFormContainer: {
-    flex: 0.5,
+    flex: 0.35,
     width: "100%",
   },
   addFromRow: {

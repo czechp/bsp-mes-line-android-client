@@ -11,16 +11,16 @@ const RawMaterialNavigator = () => {
   return (
     <AppScreen>
       <RawMaterialTabNavigator.Navigator>
-          <RawMaterialTabNavigator.Screen 
-                  name="RawMaterialAddScreen"
-                  component={RawMaterialAddScreen}
-                  options={{ title: "Dodaj pobrany surowiec" }}
-          />
-          <RawMaterialTabNavigator.Screen 
-                  name="RawMaterialListScreen"
-                  component={RawMaterialListScreen}
-                  options={{ title: "Lista pobranych surowców" }}
-          />
+        <RawMaterialTabNavigator.Screen
+          name="RawMaterialAddScreen"
+          component={RawMaterialAddScreen}
+          options={{ title: "Dodaj pobrany surowiec" }}
+        />
+        <RawMaterialTabNavigator.Screen
+          name="RawMaterialListScreen"
+          component={RawMaterialListScreen}
+          options={{ title: "Lista pobranych surowców" }}
+        />
       </RawMaterialTabNavigator.Navigator>
     </AppScreen>
   );
