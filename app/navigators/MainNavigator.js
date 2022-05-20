@@ -12,6 +12,7 @@ import ReportNavigator from "./ReportNavigator";
 import DowntimeNavigator from "./DowntimeNavigator";
 import QualityControlNavigator from "./QualityControlNavigator";
 import BreakdownNavigator from "./BreakdownNavigator";
+import RawMaterialNavigator from "./RawMaterialNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,10 @@ const MainNavigator = () => {
         }}
       >
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen
+          name="RawMaterialNavigator"
+          component={RawMaterialNavigator}
+        />
         <Stack.Screen name="DowntimeNavigator" component={DowntimeNavigator} />
         <Stack.Screen
           name="QualityControlNavigator"
