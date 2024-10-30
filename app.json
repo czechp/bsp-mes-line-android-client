@@ -21,7 +21,7 @@
     },
     "android": {
       "package": "android.mes",
-      "versionCode": 1,
+      "versionCode": 1 ,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -29,11 +29,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "86113dc1-99a6-449b-91ae-39a43bf74e4c"
-      }
     }
   }
 }
